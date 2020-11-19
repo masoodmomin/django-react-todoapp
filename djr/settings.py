@@ -126,4 +126,4 @@ STATICFILES_DIRS =[
     BASE_DIR / 'react-project/build/static'
 ]
 
-CORS_ORIGIN_WHITELIST = ["http://localhost:3000",'https://hoppscotch.io']
+CORS_ORIGIN_WHITELIST = ["http://localhost:3000"]
