@@ -7,8 +7,7 @@ export default function App() {
   const [todos, setTodos] = useState([]);
   const [category, setCategory] = useState("All");
   const [filteredTodos, setFilteredTodos] = useState([]);
-  const fetchTodos = () => {
-    console.log("Fetching...");
+  function fetchTodos() {
     fetch('http://127.0.0.1:8000/api/all/')
     .then(response => response.json())
     .then(data => 
@@ -17,6 +16,7 @@ export default function App() {
         window.alert(error)
       })
   }
+
   useEffect(fetchTodos,[])
 
   useEffect(() => {
@@ -50,6 +50,7 @@ export default function App() {
       />
       <TodoList
         filteredTodos={filteredTodos}
+        fetchTodos={fetchTodos}
         setTodos={setTodos}
         todos={todos}
       />

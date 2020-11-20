@@ -10,6 +10,7 @@ const TodoList = (props) => {
           <TodoItem
             setTodos={props.setTodos}
             todos={props.todos}
+            fetchTodos={props.fetchTodos}
             todo={todo}
             text={todo.text}
             completed={todo.completed}

@@ -29,7 +29,7 @@ const csrftoken = getCookie('csrftoken');
       body: JSON.stringify({text:props.todo.text})
     }).then((response) => {
         props.setTodos(props.todos.filter((el) => el.id !== props.todo.id))
-      
+        props.fetchTodos()
       }).catch(function(error) {
         window.alert(error)
       })
@@ -38,29 +38,19 @@ const csrftoken = getCookie('csrftoken');
 
     var url = 'http://127.0.0.1:8000/api/status/'
   
-    props.setTodos(
-      props.todos.map((item) => {
-        if (item.id === props.todo.id) {
-          fetch(url,{
-            method:'PUT',
-            headers:{
-              'Content-type':'application/json',
-              'X-CSRFToken': csrftoken
-            },
-            body: JSON.stringify({...item,completed: !item.completed})
-          })
-            .catch(function(error) {
-              window.alert(error)
-            })
-      
-          return {
-            ...item,
-            completed: !item.completed
-          };
-        }
-        return item;
+    fetch(url,{
+      method:'PUT',
+      headers:{
+        'Content-type':'application/json',
+        'X-CSRFToken': csrftoken
+      },
+      body: JSON.stringify({...props.todo,completed: !props.todo.completed})
+    }).then((response) => {
+        props.setTodos(props.todos.filter((el) => el.id !== props.todo.id))
+        props.fetchTodos()
+      }).catch(function(error) {
+        window.alert(error)
       })
-    );
   };
   let item;
   if (props.completed) {
